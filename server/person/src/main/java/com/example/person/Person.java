@@ -13,8 +13,8 @@ public class Person {
     private int id;
     private String firstName;
     private String lastName;
-    private String dob;
-    private int zipcode;
+    private String email;
+    private int streetNumber;
 
 
     public Person() {
@@ -48,21 +48,19 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getDob() {
-        return dob;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getZipcode() {
-        return zipcode;
+    public int getStreetNumber() {
+        return streetNumber;
     }
 
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    
+    public void setStreetNumber(int streetNumber) {
+        this.streetNumber = streetNumber;
+    }    
 }
