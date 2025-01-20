@@ -2,5 +2,6 @@
     "java.compile.nullAnalysis.mode": "automatic",
     "java.project.sourcePaths": [
         "server/person/src/main/java/com/example"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
