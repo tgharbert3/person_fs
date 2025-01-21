@@ -1,9 +1,10 @@
 export async function getPeople() {
 
-    const respose = await fetch('http://localhost:8080/person');
+    const respose = await fetch('http://localhost:8080/person?offset=0&size=5');
     const data = await respose.json();
 
-    return data;
+    console.log(data);
+    return data.content;
 }   
 
 export async function getPeopleByID( id: number ) {
@@ -27,4 +28,5 @@ export async function loadPeople(firstName: string, lastName: string, email: str
             streetNumber: streetNumber,
         })
     })
+    console.log(response);
 }
