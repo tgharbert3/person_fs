@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react"
 
-import { getPeople } from "../services/api"
+import { fetchPeopleBySize } from "../services/api"
 import NavBar from "../components/NavBar";
-import Card from "../components/card";
+import Card from '../components/Card'
 import '../index.css';
+import '../container.css'
 import HeaderCard from "../components/HearderCard";
+
+import { useAppSelector } from "../store/hooks";
+import { selectLimit } from "../store/pageSizeSlice";
+import PageButton from "../components/PageButton";
 
 
 interface person {
@@ -19,37 +24,37 @@ export default function Home() {
 
     const [people, setPeople] = useState<person[]>([]);
 
+    const pageSize = useAppSelector(selectLimit);
+
+    console.log(pageSize);
+
     useEffect(() => {
-        async function gotPeople() {
-            const peopleFromApi = await getPeople();
+        async function fetchPeople(size: number) {
+            const peopleFromApi = await fetchPeopleBySize(String(size));
             setPeople(peopleFromApi);
         }
-        gotPeople();
-    }, [])
+        fetchPeople(pageSize);
+    }, [pageSize])
 
     
     console.log(people);
     return (
        <div>
-            <main>
+            <main className="">
                 <NavBar />
                 <HeaderCard />
-                {people.map((person) => {
-                    return <Card 
-                        id={0} 
-                        firstName={person.firstName} 
-                        lastName={person.lastName} 
-                        email={person.email} 
-                        streetNumber={person.streetNumber} 
-                        key={person.id} />
-
-                })}
-                <div className="join">
-                    <button className="join-item btn">1</button>
-                    <button className="join-item btn">2</button>
-                    <button className="join-item btn">3</button>
-                    <button className="join-item btn">4</button>
-                </div>
+                    <div className="container">
+                        {people.map((person) => {
+                            return <Card 
+                                id={0} 
+                                firstName={person.firstName} 
+                                lastName={person.lastName} 
+                                email={person.email} 
+                                streetNumber={person.streetNumber} 
+                                key={person.id} />
+                        })}
+                    </div>  
+                <PageButton />
             </main>        
        </div>
     )

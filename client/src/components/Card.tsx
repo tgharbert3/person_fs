@@ -9,12 +9,13 @@ interface CardProps {
 export default function Card( {id, firstName, lastName, email, streetNumber }: CardProps  ){
     return (
         <div className="card bg-neutral shadow-xl m-3.5 text-neutral-content">
-            <div className="flex justify-evenly">
+            <div className="flex justify-between">
                 <p className="">{firstName}</p>
                 <p className="">{lastName}</p>
                 <p>{email}</p>
                 <p>{streetNumber}</p>
             </div>
+            
         </div>
     )
 }

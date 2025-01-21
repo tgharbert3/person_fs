@@ -1,12 +1,23 @@
+import { useAppDispatch } from "../store/hooks"
+import { limitSet } from "../store/pageSizeSlice";
+
 export default function NavBar() {
+    
+    const dispacth = useAppDispatch();
+
+    async function onclickHandler(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
+        dispacth(limitSet(Number(event.currentTarget.value)))
+    }
+
     return (
         <div className="navbar bg-base-100 mb-3.5">
             <div className="flex-none">
                 <details className="dropdown">
                     <summary className="btn m-1">Change Page Size</summary>
                     <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
+                    <button className="text-left pl-2.5 mb-1.5" value={10} onClick={onclickHandler}>10 People</button>
+                    <button className="text-left pl-2.5" value={100}  onClick={onclickHandler}>100 People</button>
                     </ul>
                 </details>
             </div>

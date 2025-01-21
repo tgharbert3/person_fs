@@ -1,11 +1,19 @@
-export async function getPeople() {
+export async function fetchPeopleBySize(size: string) {
 
-    const respose = await fetch('http://localhost:8080/person?offset=0&size=5');
+    const respose = await fetch(`http://localhost:8080/person?offset=0&size=${size}`);
     const data = await respose.json();
 
     console.log(data);
     return data.content;
-}   
+}
+
+export async function pageSize10() {
+    const respose = await fetch('http://localhost:8080/person?offset=0&size=10');
+    const data = await respose.json();
+
+    console.log(data);
+    return data.content;
+}
 
 export async function getPeopleByID( id: number ) {
 
