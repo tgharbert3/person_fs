@@ -1,10 +1,9 @@
 package com.example.person.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.person.entity.Person;
 import com.example.person.service.PersonService;
 
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

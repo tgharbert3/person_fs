@@ -34,7 +34,7 @@ export default function NavBar() {
                 </details>
             </div>
             <div className="flex-1 justify-center">
-                <a className="btn btn-ghost text-xl">People Information</a>
+                <button className="btn btn-ghost text-xl"  value={5}onClick={onclickHandler}>People Information</button>
             </div>
             <div className="flex-none">
                 <button className="btn btn-square btn-ghost">

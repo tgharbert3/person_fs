@@ -1,7 +1,7 @@
-export async function fetchPeopleBySize(size: string) {
+export async function fetchPeopleBySize(pageNum: string, size: string) {
 
     try {
-        const respose = await fetch(`http://localhost:8080/person?offset=0&size=${size}`);
+        const respose = await fetch(`http://localhost:8080/person?offset=${pageNum}&size=${size}`);
         const data = await respose.json();
 
         return data.content;

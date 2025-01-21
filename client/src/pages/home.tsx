@@ -8,7 +8,7 @@ import '../styles/container.css'
 import HeaderCard from "../components/HearderCard";
 
 import { useAppSelector } from "../store/hooks";
-import { selectLimit } from "../store/pageSizeSlice";
+import { selectLimit, selectOffset } from "../store/pageSizeSlice";
 import PageButton from "../components/PageButton";
 
 
@@ -25,27 +25,26 @@ export default function Home() {
     const [people, setPeople] = useState<person[]>([]);
 
     const pageSize = useAppSelector(selectLimit);
-
-    console.log(pageSize);
+    const pageNum = useAppSelector(selectOffset);
 
     useEffect(() => {
-        async function fetchPeople(size: number) {
+        async function fetchPeople(pageNum: number, size: number) {
             try {
-                const peopleFromApi = await fetchPeopleBySize(String(size));
+                const peopleFromApi = await fetchPeopleBySize(String(pageNum), String(size));
                 setPeople(peopleFromApi);
             } catch(error) {
                 console.error(error);
             };
         }
-        fetchPeople(pageSize);
-    }, [pageSize])
+        fetchPeople(pageNum, pageSize);
+    }, [pageSize, pageNum])
 
     return (
        <div>
             <main className="">
                 <NavBar />
                 <HeaderCard />
-                    <div className="container">
+                    <div className="container mb-3.5">
                         {people.map((person) => {
                             return <Card 
                                 id={0} 
