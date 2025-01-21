@@ -6,7 +6,7 @@ import DbReducer from './databaseSlice';
 export const store = configureStore({
     reducer: {
         pageReducer: pageSizeReducer,
-        dbRedicer: DbReducer,
+        dbReducer: DbReducer,
     }
 })
 

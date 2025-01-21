@@ -7,9 +7,10 @@ import '../styles/index.css';
 import '../styles/container.css'
 import HeaderCard from "../components/HearderCard";
 
-import { useAppSelector } from "../store/hooks";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { selectLimit, selectOffset } from "../store/pageSizeSlice";
 import PageButton from "../components/PageButton";
+import { fetchNumPeople, selectNumPeopleStatus } from "../store/databaseSlice";
 
 
 interface person {
@@ -23,20 +24,26 @@ interface person {
 export default function Home() {
 
     const [people, setPeople] = useState<person[]>([]);
+    const dispatch = useAppDispatch();
 
     const pageSize = useAppSelector(selectLimit);
     const pageNum = useAppSelector(selectOffset);
+    const numPeopleStatus = useAppSelector(selectNumPeopleStatus);
 
     useEffect(() => {
         async function fetchPeople(pageNum: number, size: number) {
             try {
                 const peopleFromApi = await fetchPeopleBySize(String(pageNum), String(size));
                 setPeople(peopleFromApi);
+                if (numPeopleStatus === 'idle') {
+                    dispatch(fetchNumPeople());
+                }
             } catch(error) {
                 console.error(error);
             };
         }
         fetchPeople(pageNum, pageSize);
+        
     }, [pageSize, pageNum])
 
     return (
