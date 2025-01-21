@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 import { fetchPeopleBySize } from "../services/api"
 import NavBar from "../components/NavBar";
 import Card from '../components/Card'
-import '../index.css';
-import '../container.css'
+import '../styles/index.css';
+import '../styles/container.css'
 import HeaderCard from "../components/HearderCard";
 
 import { useAppSelector } from "../store/hooks";
@@ -30,14 +30,16 @@ export default function Home() {
 
     useEffect(() => {
         async function fetchPeople(size: number) {
-            const peopleFromApi = await fetchPeopleBySize(String(size));
-            setPeople(peopleFromApi);
+            try {
+                const peopleFromApi = await fetchPeopleBySize(String(size));
+                setPeople(peopleFromApi);
+            } catch(error) {
+                console.error(error);
+            };
         }
         fetchPeople(pageSize);
     }, [pageSize])
 
-    
-    console.log(people);
     return (
        <div>
             <main className="">

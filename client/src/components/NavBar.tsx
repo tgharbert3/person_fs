@@ -1,5 +1,6 @@
 import { useAppDispatch } from "../store/hooks"
 import { limitSet } from "../store/pageSizeSlice";
+import { allPeople } from "../services/api";
 
 export default function NavBar() {
     
@@ -7,7 +8,16 @@ export default function NavBar() {
 
     async function onclickHandler(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-        dispacth(limitSet(Number(event.currentTarget.value)))
+        if (event.currentTarget.value === "all") {
+            try {
+                const response = await allPeople();
+                dispacth(limitSet(response.length));
+            } catch (error) {
+                console.error(error);
+            }
+        } else {
+            dispacth(limitSet(Number(event.currentTarget.value)));
+        }
     }
 
     return (
@@ -16,8 +26,10 @@ export default function NavBar() {
                 <details className="dropdown">
                     <summary className="btn m-1">Change Page Size</summary>
                     <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                    <button className="text-left pl-2.5 mb-1.5" value={10} onClick={onclickHandler}>10 People</button>
-                    <button className="text-left pl-2.5" value={100}  onClick={onclickHandler}>100 People</button>
+                        <button className="text-left pl-2.5 mb-1.5" value={10} onClick={onclickHandler}>10 People</button>
+                        <button className="text-left pl-2.5 mb-1.5" value={100}  onClick={onclickHandler}>100 People</button>
+                        <button className="text-left pl-2.5 mb-1.5" value={1000}  onClick={onclickHandler}>1000 People</button>
+                        <button className="text-left pl-2.5 mb-1.5" value={"all"}  onClick={onclickHandler}>All People</button>
                     </ul>
                 </details>
             </div>

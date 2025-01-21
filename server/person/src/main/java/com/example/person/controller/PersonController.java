@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 
 @CrossOrigin
 @RestController
@@ -28,10 +30,10 @@ public class PersonController {
         return personService.savePerson(person);
     }
 
-    // @GetMapping("")
-    // public List<Person> getPerson() {
-    //     return personService.findAllPeople();
-    // }
+    @GetMapping("/all")
+    public List<Person> getPerson() {
+        return personService.findAllPeople();
+    }
 
     @GetMapping("")
     public Page<Person> getPage(@RequestParam(name = "offset", required = true, defaultValue = "0") int start, 
