@@ -52,15 +52,17 @@ export default function Home() {
                 <NavBar />
                 <HeaderCard />
                     <div className="container mb-3.5">
+                        <div>
                         {people.map((person) => {
                             return <Card 
-                                id={0} 
+                                id={person.id} 
                                 firstName={person.firstName} 
                                 lastName={person.lastName} 
                                 email={person.email} 
                                 streetNumber={person.streetNumber} 
                                 key={person.id} />
                         })}
+                        </div>
                     </div>  
                 <PageButton />
             </main>        
