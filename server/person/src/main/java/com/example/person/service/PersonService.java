@@ -7,6 +7,7 @@ import com.example.person.entity.Person;
 import com.example.person.repo.PersonRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -28,5 +29,10 @@ public class PersonService {
 
     public Page<Person> findByPage(int offset, int size) {
         return personRepository.findAll(PageRequest.of(offset, size));
+    }
+
+    public ResponseEntity<?> deletePerson(Person person) {
+         personRepository.delete(person);
+         return ResponseEntity.ok().build();
     }
 }

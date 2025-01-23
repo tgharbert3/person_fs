@@ -36,7 +36,7 @@ export default function Card( {id, firstName, lastName, email, streetNumber }: C
                     </div>
                     <div className="basis-1/2 flex gap-2">
                             <button value={id} onClick={isEditableHandler}>Edit</button>
-                            <button>Save</button>
+                            
                     </div>
                 </div>
             </div>

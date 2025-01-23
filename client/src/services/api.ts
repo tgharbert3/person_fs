@@ -53,23 +53,44 @@ export async function loadPeople(firstName: string, lastName: string, email: str
     }
 }
 
-    export async function updatePerson(id: number, firstName: string, lastName: string, email: string, streetNumber: number) {
-        try {
-            const response = await fetch(`http://localhost:8080/person/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    id: id,
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    streetNumber: streetNumber,
-                })
+export async function updatePerson(id: number, firstName: string, lastName: string, email: string, streetNumber: number) {
+    try {
+        const response = await fetch(`http://localhost:8080/person/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: id,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                streetNumber: streetNumber,
             })
-            return response;
-        } catch (error) {
-            console.error(error);
-        } 
+        })
+        return response;
+    } catch (error) {
+        console.error(error);
+    } 
+}
+
+export async function deletePerson(id: number, firstName: string, lastName: string, email: string, streetNumber: number) {
+    try {
+        const response = await fetch(`http://localhost:8080/person/${id}`, {
+            method: "Delete",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: id,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                streetNumber: streetNumber,
+            })
+        })
+        return response;
+    } catch (error) {
+        console.error(error);
+    } 
 }
