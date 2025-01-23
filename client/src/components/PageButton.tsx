@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { selectNumPeople } from "../store/databaseSlice";
+import { useState, useEffect } from "react";
+import { selectAllPeople } from "../store/databaseSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { offsetSet, selectLimit } from "../store/pageSizeSlice";
 
@@ -8,17 +8,19 @@ export default function PageButton() {
     const dispatch = useAppDispatch();
     const [middlePage, setMiddlePage] = useState(2);
 
-
-    const numPeople = useAppSelector(selectNumPeople);
+    const numPeople = useAppSelector(selectAllPeople);
     const pageSize = useAppSelector(selectLimit);
-    let numPages = 1;
+    let numPages: number | undefined = 0;
 
-    if (numPeople !== 0) {
-        numPages = numPeople / pageSize;
-        if (!Number.isInteger(numPages)) {
-            numPages = Math.ceil(numPages);
+    useEffect(() => {
+        if (numPeople.length !== 0) {
+            const allPeopleLength = numPeople.length;
+            numPages = allPeopleLength / pageSize;
+            if (!Number.isInteger(numPages)) {
+                numPages = Math.ceil(numPages);
+            }
         }
-    }
+    },[])
 
     async function onclickHandler(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();

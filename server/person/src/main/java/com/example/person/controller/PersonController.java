@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @CrossOrigin
@@ -38,6 +41,12 @@ public class PersonController {
     public Page<Person> getPage(@RequestParam(name = "offset", required = true, defaultValue = "0") int start, 
                                 @RequestParam(name = "size", required = true) int limit) {
         return personService.findByPage(start, limit);
+    }
+
+    @PutMapping("/{id}")
+    public Person updatePerson(@PathVariable int id, @RequestBody Person person) { 
+        person.setId(id);
+        return personService.savePerson(person);
     }
     
 }

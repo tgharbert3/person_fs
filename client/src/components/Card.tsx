@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useAppDispatch } from "../store/hooks";
+import { personToEditSet } from "../store/databaseSlice";
 
 interface CardProps {
     id: number;
@@ -10,11 +11,11 @@ interface CardProps {
 
 export default function Card( {id, firstName, lastName, email, streetNumber }: CardProps  ){
     
-    const [isEditable, setIsEditable] = useState(false)
-    
+    const dispatch = useAppDispatch();
+
     function isEditableHandler(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-        console.log(event.currentTarget.value);
+        dispatch(personToEditSet(Number(event.currentTarget.value)));
     }
 
     return (
